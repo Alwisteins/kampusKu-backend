@@ -140,11 +140,11 @@ const getCampusByFakultas = catchAsync(async (req, res) => {
 });
 
 const getCampusByAkreditasi = catchAsync(async (req, res) => {
-  const { rank } = req.body;
+  const { akreditasi } = req.body;
   // 1) catch all return from kampusService into variabel
   const {
     statusCode, status, message, kampus,
-  } = await kampusService.getCampusByRank(rank);
+  } = await kampusService.getCampusByRank(akreditasi);
 
   // 2) validate if status variabel value false
   if (status === false) {
