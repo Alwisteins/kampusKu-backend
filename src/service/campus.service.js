@@ -70,7 +70,7 @@ const getCampusByName = catchAsync(async (name) => {
   };
 });
 
-const getCampusByTipe = catchAsync(async (tipe) => {
+const getCampusByType = catchAsync(async (tipe) => {
   // 1) find data kampus from collection
   const kampus = await Kampus.find(tipe);
 
@@ -114,7 +114,7 @@ const getCampusByRank = catchAsync(async () => {
   };
 });
 
-const getCampusByFakultas = catchAsync(async (fakultas) => {
+const getCampusByFaculty = catchAsync(async (fakultas) => {
   // 1) find data kampus from collection
   const kampus = await Kampus.find(fakultas);
 
@@ -136,7 +136,7 @@ const getCampusByFakultas = catchAsync(async (fakultas) => {
   };
 });
 
-const getCampusByAkreditasi = catchAsync(async (akreditasi) => {
+const getCampusByAccreditation = catchAsync(async (akreditasi) => {
   // 1) find data kampus from collection
   const kampus = await Kampus.find(akreditasi);
 
@@ -158,14 +158,14 @@ const getCampusByAkreditasi = catchAsync(async (akreditasi) => {
   };
 });
 
-const kampusService = {
+const campusService = {
   getAllCampus,
   getCampusById,
   getCampusByName,
-  getCampusByTipe,
+  getCampusByType,
   getCampusByRank,
-  getCampusByFakultas,
-  getCampusByAkreditasi,
+  getCampusByFaculty,
+  getCampusByAccreditation,
 };
 
-export default kampusService;
+export default campusService;
