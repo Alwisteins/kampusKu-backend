@@ -3,18 +3,28 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {
-    "commit": "git add . && cz",
-    "start": "nodemon --exec babel-node server.js"
-  },
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "commit": "git add . && cz",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx,md,mdx}\" --fix",
+    "lint:fix": "eslint --fix \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
+    "start": "nodemon --exec babel-node server.js"
+  },
+  "lint-staged": {
+    "**/*.{html,css,scss,less,json,js,jsx,ts,tsx,md,mdx}\"": [
+      "prettier --config .prettierrc.json --write \"**/*.{html,css,scss,less,json,js,jsx,ts,tsx,md,mdx}\""
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/node": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.42.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
     "nodemon": "^2.0.22"
   },
   "dependencies": {

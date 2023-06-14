@@ -5,7 +5,7 @@ import { urlencoded, json } from "body-parser";
 
 const app = express();
 
-//middleware
+// middleware
 app.use(cors());
 app.use(helmet());
 app.use(urlencoded({ extended: true }));
