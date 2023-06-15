@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { urlencoded, json } from "body-parser";
+import routes from "../src/router/campus.router";
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(json());
 app.get("/", (req, res) => {
   res.status(200).json({ status: true, message: "connected into server!" });
 });
+
+app.use(routes);
 
 app.use("*", (req, res) => {
   res.status(404).json({ status: false, message: "ups something went wrong" });

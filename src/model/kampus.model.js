@@ -19,5 +19,5 @@ const kampusSchema = new Schema({
   link: {},
 });
 
-const Kampus = mongoose.Model("Kampus", kampusSchema);
+const Kampus = mongoose.model("Kampus", kampusSchema);
 export default Kampus;

@@ -12,19 +12,27 @@ routes.get("/campus/rank", campusController.getCampusByRank);
 // Rute untuk properti getCampusByName
 routes.get("/campus/:name", campusController.getCampusByName);
 
-// Rute untuk properti getCampusByTipe
-// routes.get("/campus/filter/:type", campusController.getCampusByType); wrong path
+// Rute untuk filter pada path '/campus/filter'
+routes.get("/campus/filter", (req, res) => {
+  const filters = req.query; // Mengambil query parameters dari permintaan
 
-// Rute untuk properti getCampusByFakultas
-// routes.get("/campus/filter/:faculty", campusController.getCampusByFaculty); wrong path
-
-// Rute untuk properti getCampusByAkreditasi
-/*
-routes.get(
-  "/campus/filter/:accreditation",
-  campusController.getCampusByAccreditation
-); wrong path
-*/
+  // Mengecek setiap filter yang dipilih dan memanggil controller yang sesuai
+  if (filters.type) {
+    campusController.getCampusByType(req, res);
+  } else if (filters.location) {
+    campusController.getCampusByLocation(req, res);
+  } else if (filters.faculty) {
+    campusController.getCampusByFaculty(req, res);
+  } else if (filters.accreditation) {
+    campusController.getCampusByAccreditation(req, res);
+  } else {
+    res
+      .status(400)
+      .json({ status: false, message: "No valid filter provided" });
+  }
+});
 
 // Rute untuk properti getCampusById
-routes.get("/campus/filter/:id", campusController.getCampusById);
+routes.get("/campus/detail/:id", campusController.getCampusById);
+
+export default routes;
