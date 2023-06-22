@@ -1,5 +1,5 @@
 import catchAsync from "../utils/catchAsync";
-import campusModel from "../model/campus.service";
+import campusModel from "../model/campus.model";
 
 const getAllCampus = catchAsync(async (req, res) => {
   // 1) catch all return from kampusService into variabel
