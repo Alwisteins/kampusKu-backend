@@ -4,7 +4,7 @@ import campusModel from "../model/campus.model";
 const getAllCampus = catchAsync(async (req, res) => {
   // 1) catch all return from kampusService into variabel
   const {
-    statusCode, status, message, kampus,
+    statusCode, status, message, kampus, reason,
   } = await campusModel.getAllCampus();
 
   // 2) validate if status variabel value false
@@ -12,6 +12,7 @@ const getAllCampus = catchAsync(async (req, res) => {
     return res.status(statusCode).json({
       status,
       message,
+      reason,
     });
   }
 
@@ -27,7 +28,7 @@ const getCampusById = catchAsync(async (req, res) => {
   const { id } = req.params;
   // 1) catch all return from kampusService into variabel
   const {
-    statusCode, status, message, kampus,
+    statusCode, status, message, kampus, reason,
   } = await campusModel.getCampusById(id);
 
   // 2) validate if status variabel value false
@@ -35,6 +36,7 @@ const getCampusById = catchAsync(async (req, res) => {
     return res.status(statusCode).json({
       status,
       message,
+      reason,
     });
   }
 
@@ -51,14 +53,15 @@ const getCampusByName = catchAsync(async (req, res) => {
 
   // 1) catch all return from kampusService into variabel
   const {
-    statusCode, status, message, kampus,
-  } = await campusModel.getCampusById(name);
+    statusCode, status, message, kampus, reason,
+  } = await campusModel.getCampusByName(name);
 
   // 2) validate if status variabel value false
   if (status === false) {
     return res.status(statusCode).json({
       status,
       message,
+      reason,
     });
   }
 
@@ -75,7 +78,7 @@ const getCampusByType = catchAsync(async (req, res) => {
 
   // 1) catch all return from kampusService into variabel
   const {
-    statusCode, status, message, kampus,
+    statusCode, status, message, kampus, reason,
   } = await campusModel.getCampusByType(tipe);
 
   // 2) validate if status variabel value false
@@ -83,6 +86,7 @@ const getCampusByType = catchAsync(async (req, res) => {
     return res.status(statusCode).json({
       status,
       message,
+      reason,
     });
   }
 
@@ -97,7 +101,7 @@ const getCampusByType = catchAsync(async (req, res) => {
 const getCampusByRank = catchAsync(async (req, res) => {
   // 1) catch all return from kampusService into variabel
   const {
-    statusCode, status, message, kampus,
+    statusCode, status, message, kampus, reason,
   } = await campusModel.getCampusByRank();
 
   // 2) validate if status variabel value false
@@ -105,6 +109,7 @@ const getCampusByRank = catchAsync(async (req, res) => {
     return res.status(statusCode).json({
       status,
       message,
+      reason,
     });
   }
 
@@ -120,7 +125,7 @@ const getCampusByFaculty = catchAsync(async (req, res) => {
   const { fakultas } = req.body;
   // 1) catch all return from kampusService into variabel
   const {
-    statusCode, status, message, kampus,
+    statusCode, status, message, kampus, reason,
   } = await campusModel.getCampusByFaculty(fakultas);
 
   // 2) validate if status variabel value false
@@ -128,6 +133,7 @@ const getCampusByFaculty = catchAsync(async (req, res) => {
     return res.status(statusCode).json({
       status,
       message,
+      reason,
     });
   }
 
@@ -143,7 +149,7 @@ const getCampusByAccreditation = catchAsync(async (req, res) => {
   const { akreditasi } = req.body;
   // 1) catch all return from kampusService into variabel
   const {
-    statusCode, status, message, kampus,
+    statusCode, status, message, kampus, reason,
   } = await campusModel.getCampusByAccreditation(akreditasi);
 
   // 2) validate if status variabel value false
@@ -151,6 +157,7 @@ const getCampusByAccreditation = catchAsync(async (req, res) => {
     return res.status(statusCode).json({
       status,
       message,
+      reason,
     });
   }
 
