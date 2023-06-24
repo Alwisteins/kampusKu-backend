@@ -1,7 +1,7 @@
 import catchAsync from "../utils/catchAsync";
-import campusModel from "../model/campus.model";
+import { campusModel } from "../model";
 
-const getAllCampus = catchAsync(async (req, res) => {
+export const getAllCampus = catchAsync(async (req, res) => {
   // 1) catch all return from kampusService into variabel
   const {
     statusCode, status, message, kampus, reason,
@@ -24,7 +24,7 @@ const getAllCampus = catchAsync(async (req, res) => {
   });
 });
 
-const getCampusById = catchAsync(async (req, res) => {
+export const getCampusById = catchAsync(async (req, res) => {
   const { id } = req.params;
   // 1) catch all return from kampusService into variabel
   const {
@@ -48,7 +48,7 @@ const getCampusById = catchAsync(async (req, res) => {
   });
 });
 
-const getCampusByName = catchAsync(async (req, res) => {
+export const getCampusByName = catchAsync(async (req, res) => {
   const { name } = req.body;
 
   // 1) catch all return from kampusService into variabel
@@ -73,7 +73,7 @@ const getCampusByName = catchAsync(async (req, res) => {
   });
 });
 
-const getCampusByType = catchAsync(async (req, res) => {
+export const getCampusByType = catchAsync(async (req, res) => {
   const { tipe } = req.body;
 
   // 1) catch all return from kampusService into variabel
@@ -98,7 +98,7 @@ const getCampusByType = catchAsync(async (req, res) => {
   });
 });
 
-const getCampusByRank = catchAsync(async (req, res) => {
+export const getCampusByRank = catchAsync(async (req, res) => {
   // 1) catch all return from kampusService into variabel
   const {
     statusCode, status, message, kampus, reason,
@@ -121,7 +121,7 @@ const getCampusByRank = catchAsync(async (req, res) => {
   });
 });
 
-const getCampusByFaculty = catchAsync(async (req, res) => {
+export const getCampusByFaculty = catchAsync(async (req, res) => {
   const { fakultas } = req.body;
   // 1) catch all return from kampusService into variabel
   const {
@@ -145,7 +145,7 @@ const getCampusByFaculty = catchAsync(async (req, res) => {
   });
 });
 
-const getCampusByAccreditation = catchAsync(async (req, res) => {
+export const getCampusByAccreditation = catchAsync(async (req, res) => {
   const { akreditasi } = req.body;
   // 1) catch all return from kampusService into variabel
   const {
@@ -168,15 +168,3 @@ const getCampusByAccreditation = catchAsync(async (req, res) => {
     kampus,
   });
 });
-
-const campusController = {
-  getAllCampus,
-  getCampusById,
-  getCampusByName,
-  getCampusByType,
-  getCampusByRank,
-  getCampusByFaculty,
-  getCampusByAccreditation,
-};
-
-export default campusController;

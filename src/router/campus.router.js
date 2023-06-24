@@ -1,5 +1,5 @@
 import { Router } from "express";
-import campusController from "../controller/campus.controller";
+import { campusController } from "../controller";
 
 const routes = Router();
 
@@ -14,7 +14,7 @@ routes.get("/campus/:name", campusController.getCampusByName);
 
 // Rute untuk filter pada path '/campus/filter'
 routes.get("/campus/filter", (req, res) => {
-  const filters = req.query; // Mengambil query parameters dari permintaan
+  const filters = req.body; // Mengambil query parameters dari permintaan
 
   // Mengecek setiap filter yang dipilih dan memanggil controller yang sesuai
   if (filters.type) {

@@ -9,7 +9,7 @@
     "commit": "git add . && cz",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx,md,mdx}\" --fix",
     "lint:fix": "eslint --fix \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
-    "start": "nodemon --exec babel-node server.js"
+    "dev": "nodemon --exec babel-node server.js"
   },
   "lint-staged": {
     "**/*.{html,css,scss,less,json,js,jsx,ts,tsx,md,mdx}\"": [
