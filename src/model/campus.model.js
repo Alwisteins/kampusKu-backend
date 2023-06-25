@@ -81,16 +81,16 @@ const getCampusByName = catchAsync(async (name) => {
   }
 });
 
-const getCampusByType = catchAsync(async (tipe) => {
+const getCampusByType = catchAsync(async (type) => {
   try {
     // 1) find data kampus from tabel
-    const [rows] = await pool.query(`SELECT * FROM kampus WHERE tipe=${tipe}`);
+    const [rows] = await pool.query(`SELECT * FROM kampus WHERE tipe='${type}'`);
     // 2) return if data null
     if (rows.length < 1) {
       return {
         statusCode: 404,
         status: false,
-        message: `kampus dengan tipe ${tipe} tidak ditemukan`,
+        message: `kampus dengan tipe ${type} tidak ditemukan`,
       };
     }
     // 3) return if success
@@ -145,7 +145,7 @@ const getCampusByFaculty = catchAsync(async (fakultas) => {
   try {
     // 1) find data kampus from tabel
     const [rows] = await pool.query(
-      `SELECT * FROM kampus WHERE fakultas=${fakultas}`,
+      `SELECT * FROM kampus WHERE fakultas='${fakultas}'`,
     );
     // 2) return if data null
     if (rows.length < 1) {
@@ -177,7 +177,7 @@ const getCampusByAccreditation = catchAsync(async (akreditasi) => {
   try {
     // 1) find data kampus from tabel
     const [rows] = await pool.query(
-      `SELECT * FROM kampus WHERE akreditasi=${akreditasi}`,
+      `SELECT * FROM kampus WHERE akreditasi='${akreditasi}'`,
     );
     // 2) return if data null
     if (rows.length < 1) {

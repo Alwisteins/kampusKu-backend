@@ -25,7 +25,7 @@ export const getAllCampus = catchAsync(async (req, res) => {
 });
 
 export const getCampusById = catchAsync(async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
   // 1) catch all return from kampusService into variabel
   const {
     statusCode, status, message, kampus, reason,
@@ -49,7 +49,7 @@ export const getCampusById = catchAsync(async (req, res) => {
 });
 
 export const getCampusByName = catchAsync(async (req, res) => {
-  const { name } = req.params;
+  const { name } = req.query;
 
   // 1) catch all return from kampusService into variabel
   const {
@@ -74,7 +74,7 @@ export const getCampusByName = catchAsync(async (req, res) => {
 });
 
 export const getCampusByType = catchAsync(async (req, res) => {
-  const { type } = req.params;
+  const { type } = req.query;
 
   // 1) catch all return from kampusService into variabel
   const {

@@ -10,11 +10,14 @@ campusRoutes.get("/", campusController.getAllCampus);
 campusRoutes.get("/rank", campusController.getCampusByRank);
 
 // Rute untuk properti getCampusByName
-campusRoutes.get("/:name", campusController.getCampusByName);
+campusRoutes.get("/search", campusController.getCampusByName);
+
+// Rute untuk properti getCampusById
+campusRoutes.get("/detail", campusController.getCampusById);
 
 // Rute untuk filter pada path 'campus/filter'
 campusRoutes.get("/filter", (req, res) => {
-  const filters = req.params; // Mengambil query parameters dari permintaan
+  const filters = req.query; // Mengambil query parameters dari permintaan
 
   // Mengecek setiap filter yang dipilih dan memanggil controller yang sesuai
   if (filters.type) {
@@ -31,8 +34,5 @@ campusRoutes.get("/filter", (req, res) => {
       .json({ status: false, message: "No valid filter provided" });
   }
 });
-
-// Rute untuk properti getCampusById
-campusRoutes.get("/detail/:id", campusController.getCampusById);
 
 export default campusRoutes;
