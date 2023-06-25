@@ -14,13 +14,13 @@ routes.get("/campus/:name", campusController.getCampusByName);
 
 // Rute untuk filter pada path '/campus/filter'
 routes.get("/campus/filter", (req, res) => {
-  const filters = req.body; // Mengambil query parameters dari permintaan
+  const filters = req.params; // Mengambil query parameters dari permintaan
 
   // Mengecek setiap filter yang dipilih dan memanggil controller yang sesuai
   if (filters.type) {
     campusController.getCampusByType(req, res);
-  } else if (filters.location) {
-    campusController.getCampusByLocation(req, res);
+  } else if (filters.provinsi) {
+    campusController.getCampusByProvince(req, res);
   } else if (filters.faculty) {
     campusController.getCampusByFaculty(req, res);
   } else if (filters.accreditation) {
