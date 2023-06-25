@@ -1,7 +1,7 @@
 import catchAsync from "../utils/catchAsync";
 import pool from "../config/connect";
 
-const getAllCampus = catchAsync(async () => {
+export const getAllCampus = catchAsync(async () => {
   try {
     const [rows] = await pool.query("SELECT * FROM kampus");
     if (rows.length < 1) {
@@ -27,7 +27,7 @@ const getAllCampus = catchAsync(async () => {
   }
 });
 
-const getCampusById = catchAsync(async (id) => {
+export const getCampusById = catchAsync(async (id) => {
   try {
     const [rows] = await pool.query(`SELECT * FROM kampus WHERE id=${id}`);
     if (rows.length < 1) {
@@ -53,7 +53,7 @@ const getCampusById = catchAsync(async (id) => {
   }
 });
 
-const getCampusByName = catchAsync(async (name) => {
+export const getCampusByName = catchAsync(async (name) => {
   try {
     const [rows] = await pool.query(
       `SELECT * FROM kampus WHERE name LIKE %${name}%`,
@@ -81,7 +81,7 @@ const getCampusByName = catchAsync(async (name) => {
   }
 });
 
-const getCampusByRank = catchAsync(async () => {
+export const getCampusByRank = catchAsync(async () => {
   try {
     // 1) find data kampus from tabel
     const [rows] = await pool.query("SELECT * FROM kampus ORDER BY rank ASC");
@@ -111,7 +111,7 @@ const getCampusByRank = catchAsync(async () => {
   }
 });
 
-const getCampusByFilter = catchAsync(
+export const getCampusByFilter = catchAsync(
   async (type, province, faculty, accreditation) => {
     let query = "SELECT * FROM kampus WHERE";
     const conditions = [];
@@ -166,12 +166,3 @@ const getCampusByFilter = catchAsync(
     }
   },
 );
-
-const campusModel = {
-  getAllCampus,
-  getCampusById,
-  getCampusByName,
-  getCampusByRank,
-  getCampusByFilter,
-};
-export default campusModel;
