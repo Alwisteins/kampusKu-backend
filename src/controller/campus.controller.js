@@ -73,6 +73,29 @@ export const getCampusByName = catchAsync(async (req, res) => {
   });
 });
 
+export const getCampusByRank = catchAsync(async (req, res) => {
+  // 1) catch all return from kampusService into variabel
+  const {
+    statusCode, status, message, kampus, reason,
+  } = await campusModel.getCampusByRank();
+
+  // 2) validate if status variabel value false
+  if (status === false) {
+    return res.status(statusCode).json({
+      status,
+      message,
+      reason,
+    });
+  }
+
+  // 3) response if success
+  return res.status(statusCode).json({
+    status,
+    message,
+    kampus,
+  });
+});
+
 export const getCampusByType = catchAsync(async (req, res) => {
   const { type } = req.query;
 
@@ -98,11 +121,13 @@ export const getCampusByType = catchAsync(async (req, res) => {
   });
 });
 
-export const getCampusByRank = catchAsync(async (req, res) => {
+export const getCampusByProvince = catchAsync(async (req, res) => {
+  const { province } = req.query;
+
   // 1) catch all return from kampusService into variabel
   const {
     statusCode, status, message, kampus, reason,
-  } = await campusModel.getCampusByRank();
+  } = await campusModel.getCampusByProvince(province);
 
   // 2) validate if status variabel value false
   if (status === false) {

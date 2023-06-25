@@ -2,8 +2,9 @@ import {
   getAllCampus,
   getCampusById,
   getCampusByName,
-  getCampusByType,
   getCampusByRank,
+  getCampusByType,
+  getCampusByProvince,
   getCampusByFaculty,
   getCampusByAccreditation,
 } from "./campus.controller";
@@ -12,8 +13,9 @@ export const campusController = {
   getAllCampus,
   getCampusById,
   getCampusByName,
-  getCampusByType,
   getCampusByRank,
+  getCampusByType,
+  getCampusByProvince,
   getCampusByFaculty,
   getCampusByAccreditation,
 };

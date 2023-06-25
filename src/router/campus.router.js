@@ -22,7 +22,7 @@ campusRoutes.get("/filter", (req, res) => {
   // Mengecek setiap filter yang dipilih dan memanggil controller yang sesuai
   if (filters.type) {
     campusController.getCampusByType(req, res);
-  } else if (filters.provinsi) {
+  } else if (filters.province) {
     campusController.getCampusByProvince(req, res);
   } else if (filters.faculty) {
     campusController.getCampusByFaculty(req, res);

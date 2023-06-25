@@ -81,6 +81,36 @@ const getCampusByName = catchAsync(async (name) => {
   }
 });
 
+const getCampusByRank = catchAsync(async () => {
+  try {
+    // 1) find data kampus from tabel
+    const [rows] = await pool.query("SELECT * FROM kampus ORDER BY rank ASC");
+    // 2) return if data null
+    if (rows.length < 1) {
+      return {
+        statusCode: 404,
+        status: false,
+        message: "kampus tidak ditemukan",
+      };
+    }
+    // 3) return if success
+    return {
+      statusCode: 200,
+      status: true,
+      message: "kampus ditemukan",
+      kampus: rows,
+    };
+  } catch (err) {
+    // 4) return if error
+    return {
+      statusCode: 500,
+      status: false,
+      message: "Opps, terjadi kesalahan",
+      reason: err,
+    };
+  }
+});
+
 const getCampusByType = catchAsync(async (type) => {
   try {
     // 1) find data kampus from tabel
@@ -111,16 +141,16 @@ const getCampusByType = catchAsync(async (type) => {
   }
 });
 
-const getCampusByRank = catchAsync(async () => {
+const getCampusByProvince = catchAsync(async (province) => {
   try {
     // 1) find data kampus from tabel
-    const [rows] = await pool.query("SELECT * FROM kampus ORDER BY rank ASC");
+    const [rows] = await pool.query(`SELECT * FROM kampus WHERE provinsi='${province}'`);
     // 2) return if data null
     if (rows.length < 1) {
       return {
         statusCode: 404,
         status: false,
-        message: "kampus tidak ditemukan",
+        message: `kampus dengan provinsi ${province} tidak ditemukan`,
       };
     }
     // 3) return if success
@@ -209,8 +239,9 @@ const campusModel = {
   getAllCampus,
   getCampusById,
   getCampusByName,
-  getCampusByType,
   getCampusByRank,
+  getCampusByType,
+  getCampusByProvince,
   getCampusByFaculty,
   getCampusByAccreditation,
 };
