@@ -30,7 +30,7 @@
 
 ## Get Campus By Name
 
--Endpoint: `GET` `api/v1/campus/:name`
+- Endpoint: `GET` `api/v1/campus/:name`
 
 - Request Params:
 
@@ -50,7 +50,7 @@
 
 ## Get Campus By Type
 
--Endpoint: `GET` `api/v1/campus/filter/:type`
+- Endpoint: `GET` `api/v1/campus/filter/:type`
 
 - Request Params:
 
@@ -70,7 +70,7 @@
 
 ## Get Campus By Province
 
--Endpoint: `GET` `api/v1/campus/filter/:province`
+- Endpoint: `GET` `api/v1/campus/filter/:province`
 
 - Request Params:
 
@@ -90,7 +90,7 @@
 
 ## Get Campus By Faculty
 
--Endpoint: `GET` `api/v1/campus/filter/:faculty`
+- Endpoint: `GET` `api/v1/campus/filter/:faculty`
 
 - Request Params:
 
@@ -110,7 +110,7 @@
 
 ## Get Campus By Accreditation
 
--Endpoint: `GET` `api/v1/campus/filter/:accreditation`
+- Endpoint: `GET` `api/v1/campus/filter/:accreditation`
 
 - Request Params:
 
@@ -130,7 +130,7 @@
 
 ## Get Campus By Accreditation
 
--Endpoint: `GET` `api/v1/campus/detail/:id`
+- Endpoint: `GET` `api/v1/campus/detail/:id`
 
 - Request Params:
 
