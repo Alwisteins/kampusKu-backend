@@ -2,7 +2,7 @@
 
 ## Get All Campus
 
-- Endpoint: `GET` `api/v1/campus`
+- Endpoint: `GET` `api/v1/campus/`
 
 - Response Body Success:
 
@@ -30,12 +30,12 @@
 
 ## Get Campus By Name
 
-- Endpoint: `GET` `api/v1/campus/:name`
+- Endpoint: `GET` `api/v1/campus/search`
 
-- Request Params:
+- Request Query:
 
 ```
-    "name": "campus name"
+    name= "campus name"
 ```
 
 - Response Body Success:
@@ -50,12 +50,12 @@
 
 ## Get Campus By Type
 
-- Endpoint: `GET` `api/v1/campus/filter/:type`
+- Endpoint: `GET` `api/v1/campus/filter`
 
-- Request Params:
+- Request Query:
 
 ```
-    "type": "Akademi / Universitas / Politeknik / Institut"
+    type= "Akademi" / "Universitas" / "Politeknik" / "Institut"
 ```
 
 - Response Body Success:
@@ -70,12 +70,12 @@
 
 ## Get Campus By Province
 
-- Endpoint: `GET` `api/v1/campus/filter/:province`
+- Endpoint: `GET` `api/v1/campus/filter`
 
-- Request Params:
+- Request Query:
 
 ```
-    "province": "Province Name"
+    province= "Province Name"
 ```
 
 - Response Body Success:
@@ -90,32 +90,12 @@
 
 ## Get Campus By Faculty
 
-- Endpoint: `GET` `api/v1/campus/filter/:faculty`
+- Endpoint: `GET` `api/v1/campus/filter`
 
-- Request Params:
-
-```
-    "faculty": "Faculty Name"
-```
-
-- Response Body Success:
+- Request Query:
 
 ```
-{
-    "status": true,
-    "message": "kampus ditemukan",
-    "kampus": {}
-}
-```
-
-## Get Campus By Accreditation
-
-- Endpoint: `GET` `api/v1/campus/filter/:accreditation`
-
-- Request Params:
-
-```
-    "accreditation": "Accreditation A / Accreditation B / etc."
+    faculty= "Faculty Name"
 ```
 
 - Response Body Success:
@@ -130,9 +110,29 @@
 
 ## Get Campus By Accreditation
 
-- Endpoint: `GET` `api/v1/campus/detail/:id`
+- Endpoint: `GET` `api/v1/campus/filter`
 
-- Request Params:
+- Request Query:
+
+```
+    accreditation= "Akreditasi A" / "Akreditasi B" / etc.
+```
+
+- Response Body Success:
+
+```
+{
+    "status": true,
+    "message": "kampus ditemukan",
+    "kampus": {}
+}
+```
+
+## Get Campus By Id
+
+- Endpoint: `GET` `api/v1/campus/detail`
+
+- Request query:
 
 ```
     "id": 1 / 2 / etc.
