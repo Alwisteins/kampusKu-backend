@@ -56,7 +56,7 @@ const getCampusById = catchAsync(async (id) => {
 const getCampusByName = catchAsync(async (name) => {
   try {
     const [rows] = await pool.query(
-      `SELECT * FROM kampus WHERE name LIKE '%${name}%'`,
+      `SELECT * FROM kampus WHERE name LIKE %${name}%`,
     );
     if (!rows.length) {
       return {
@@ -111,138 +111,67 @@ const getCampusByRank = catchAsync(async () => {
   }
 });
 
-const getCampusByType = catchAsync(async (type) => {
-  try {
-    // 1) find data kampus from tabel
-    const [rows] = await pool.query(`SELECT * FROM kampus WHERE tipe='${type}'`);
-    // 2) return if data null
-    if (rows.length < 1) {
-      return {
-        statusCode: 404,
-        status: false,
-        message: `kampus dengan tipe ${type} tidak ditemukan`,
-      };
-    }
-    // 3) return if success
-    return {
-      statusCode: 200,
-      status: true,
-      message: "kampus ditemukan",
-      kampus: rows,
-    };
-  } catch (err) {
-    // 4) return if error
-    return {
-      statusCode: 500,
-      status: false,
-      message: "Opps, terjadi kesalahan",
-      reason: err,
-    };
-  }
-});
+const getCampusByFilter = catchAsync(
+  async (type, province, faculty, accreditation) => {
+    let query = "SELECT * FROM kampus WHERE";
+    const conditions = [];
+    const params = [];
 
-const getCampusByProvince = catchAsync(async (province) => {
-  try {
-    // 1) find data kampus from tabel
-    const [rows] = await pool.query(`SELECT * FROM kampus WHERE provinsi='${province}'`);
-    // 2) return if data null
-    if (rows.length < 1) {
-      return {
-        statusCode: 404,
-        status: false,
-        message: `kampus dengan provinsi ${province} tidak ditemukan`,
-      };
+    // validator
+    if (type) {
+      conditions.push("tipe = ?");
+      params.push(type);
     }
-    // 3) return if success
-    return {
-      statusCode: 200,
-      status: true,
-      message: "kampus ditemukan",
-      kampus: rows,
-    };
-  } catch (err) {
-    // 4) return if error
-    return {
-      statusCode: 500,
-      status: false,
-      message: "Opps, terjadi kesalahan",
-      reason: err,
-    };
-  }
-});
+    if (province) {
+      conditions.push("provinsi = ?");
+      params.push(province);
+    }
+    if (faculty) {
+      conditions.push("fakultas = ?");
+      params.push(faculty);
+    }
+    if (accreditation) {
+      conditions.push("akreditasi = ?");
+      params.push(accreditation);
+    }
 
-const getCampusByFaculty = catchAsync(async (fakultas) => {
-  try {
-    // 1) find data kampus from tabel
-    const [rows] = await pool.query(
-      `SELECT * FROM kampus WHERE fakultas='${fakultas}'`,
-    );
-    // 2) return if data null
-    if (rows.length < 1) {
-      return {
-        statusCode: 404,
-        status: false,
-        message: `kampus dengan fakultas ${fakultas} tidak ditemukan`,
-      };
-    }
-    // 3) return if success
-    return {
-      statusCode: 200,
-      status: true,
-      message: "kampus ditemukan",
-      kampus: rows,
-    };
-  } catch (err) {
-    // 4) return if error
-    return {
-      statusCode: 500,
-      status: false,
-      message: "Opps, terjadi kesalahan",
-      reason: err,
-    };
-  }
-});
+    query += ` ${conditions.join(" OR ")}`;
 
-const getCampusByAccreditation = catchAsync(async (akreditasi) => {
-  try {
-    // 1) find data kampus from tabel
-    const [rows] = await pool.query(
-      `SELECT * FROM kampus WHERE akreditasi='${akreditasi}'`,
-    );
-    // 2) return if data null
-    if (rows.length < 1) {
+    try {
+      // 1) find data kampus from tabel
+      const [rows] = await pool.query(query, params);
+      // 2) return if data null
+      if (rows.length < 1) {
+        return {
+          statusCode: 404,
+          status: false,
+          message: "kampus tidak ditemukan",
+        };
+      }
+      // 3) return if success
       return {
-        statusCode: 404,
+        statusCode: 200,
+        status: true,
+        message: "kampus ditemukan",
+        kampus: rows,
+      };
+    } catch (err) {
+      // 4) return if error
+      return {
+        statusCode: 500,
         status: false,
-        message: `kampus dengan akreditasi ${akreditasi} tidak ditemukan`,
+        message: "Opps, terjadi kesalahan",
+        reason: err,
       };
     }
-    // 3) return if success
-    return {
-      statusCode: 200,
-      status: true,
-      message: "kampus ditemukan",
-      kampus: rows,
-    };
-  } catch (err) {
-    // 4) return if error
-    return {
-      statusCode: 500,
-      status: false,
-      message: "Opps, terjadi kesalahan",
-      reason: err,
-    };
-  }
-});
+  },
+);
 
 const campusModel = {
   getAllCampus,
   getCampusById,
   getCampusByName,
   getCampusByRank,
-  getCampusByType,
-  getCampusByProvince,
-  getCampusByFaculty,
-  getCampusByAccreditation,
+  getCampusByFilter,
 };
 export default campusModel;

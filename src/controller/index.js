@@ -3,10 +3,7 @@ import {
   getCampusById,
   getCampusByName,
   getCampusByRank,
-  getCampusByType,
-  getCampusByProvince,
-  getCampusByFaculty,
-  getCampusByAccreditation,
+  getCampusByFilter,
 } from "./campus.controller";
 
 export const campusController = {
@@ -14,8 +11,5 @@ export const campusController = {
   getCampusById,
   getCampusByName,
   getCampusByRank,
-  getCampusByType,
-  getCampusByProvince,
-  getCampusByFaculty,
-  getCampusByAccreditation,
+  getCampusByFilter,
 };

@@ -96,86 +96,15 @@ export const getCampusByRank = catchAsync(async (req, res) => {
   });
 });
 
-export const getCampusByType = catchAsync(async (req, res) => {
-  const { type } = req.query;
+export const getCampusByFilter = catchAsync(async (req, res) => {
+  const {
+    type, province, faculty, accreditation,
+  } = req.query;
 
   // 1) catch all return from kampusService into variabel
   const {
     statusCode, status, message, kampus, reason,
-  } = await campusModel.getCampusByType(type);
-
-  // 2) validate if status variabel value false
-  if (status === false) {
-    return res.status(statusCode).json({
-      status,
-      message,
-      reason,
-    });
-  }
-
-  // 3) response if success
-  return res.status(statusCode).json({
-    status,
-    message,
-    kampus,
-  });
-});
-
-export const getCampusByProvince = catchAsync(async (req, res) => {
-  const { province } = req.query;
-
-  // 1) catch all return from kampusService into variabel
-  const {
-    statusCode, status, message, kampus, reason,
-  } = await campusModel.getCampusByProvince(province);
-
-  // 2) validate if status variabel value false
-  if (status === false) {
-    return res.status(statusCode).json({
-      status,
-      message,
-      reason,
-    });
-  }
-
-  // 3) response if success
-  return res.status(statusCode).json({
-    status,
-    message,
-    kampus,
-  });
-});
-
-export const getCampusByFaculty = catchAsync(async (req, res) => {
-  const { faculty } = req.params;
-  // 1) catch all return from kampusService into variabel
-  const {
-    statusCode, status, message, kampus, reason,
-  } = await campusModel.getCampusByFaculty(faculty);
-
-  // 2) validate if status variabel value false
-  if (status === false) {
-    return res.status(statusCode).json({
-      status,
-      message,
-      reason,
-    });
-  }
-
-  // 3) response if success
-  return res.status(statusCode).json({
-    status,
-    message,
-    kampus,
-  });
-});
-
-export const getCampusByAccreditation = catchAsync(async (req, res) => {
-  const { accreditation } = req.params;
-  // 1) catch all return from kampusService into variabel
-  const {
-    statusCode, status, message, kampus, reason,
-  } = await campusModel.getCampusByAccreditation(accreditation);
+  } = await campusModel.getCampusByFilter(type, province, faculty, accreditation);
 
   // 2) validate if status variabel value false
   if (status === false) {
