@@ -5,7 +5,7 @@ dotenv.config();
 
 const pool = mysql.createPool(
   process.env.READ_DATABASE_URL ||
-    'mysql://2g33ugp9qan1qs2qyhzp:pscale_pw_B1GnsCzDegiAFD57Qq2rvXOmOwfJNUYnTzCr7yOEzBu@aws.connect.psdb.cloud/kampusku_database?ssl={"rejectUnauthorized":true}'
+    'mysql://08rd3vuv0adwffw2syx1:pscale_pw_4PaH1cEtcekZBqow2ygVCqBiREfKymXmwiI1vvM4JTk@aws.connect.psdb.cloud/kampusku_database?ssl={"rejectUnauthorized":true}'
 );
 
 export default pool;
