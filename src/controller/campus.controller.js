@@ -3,8 +3,9 @@ import campusModel from "../model/campus.model";
 
 export const getAllCampus = catchAsync(async (req, res) => {
   // 1) catch all return from kampusService into variabel
-  const { statusCode, status, message, kampus, reason } =
-    await campusModel.getAllCampus();
+  const {
+    statusCode, status, message, kampus, reason,
+  } = await campusModel.getAllCampus();
 
   // 2) validate if status variabel value false
   if (status === false) {
@@ -24,10 +25,11 @@ export const getAllCampus = catchAsync(async (req, res) => {
 });
 
 export const getCampusById = catchAsync(async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   // 1) catch all return from kampusService into variabel
-  const { statusCode, status, message, kampus, reason } =
-    await campusModel.getCampusById(id);
+  const {
+    statusCode, status, message, kampus, reason,
+  } = await campusModel.getCampusById(id);
 
   // 2) validate if status variabel value false
   if (status === false) {
@@ -47,11 +49,12 @@ export const getCampusById = catchAsync(async (req, res) => {
 });
 
 export const getCampusByName = catchAsync(async (req, res) => {
-  const name = req.params.name;
+  const { name } = req.params;
 
   // 1) catch all return from kampusService into variabel
-  const { statusCode, status, message, kampus, reason } =
-    await campusModel.getCampusByName(name);
+  const {
+    statusCode, status, message, kampus, reason,
+  } = await campusModel.getCampusByName(name);
 
   // 2) validate if status variabel value false
   if (status === false) {
@@ -71,11 +74,12 @@ export const getCampusByName = catchAsync(async (req, res) => {
 });
 
 export const getCampusByType = catchAsync(async (req, res) => {
-  const type = req.params.type;
+  const { type } = req.params;
 
   // 1) catch all return from kampusService into variabel
-  const { statusCode, status, message, kampus, reason } =
-    await campusModel.getCampusByType(type);
+  const {
+    statusCode, status, message, kampus, reason,
+  } = await campusModel.getCampusByType(type);
 
   // 2) validate if status variabel value false
   if (status === false) {
@@ -96,8 +100,9 @@ export const getCampusByType = catchAsync(async (req, res) => {
 
 export const getCampusByRank = catchAsync(async (req, res) => {
   // 1) catch all return from kampusService into variabel
-  const { statusCode, status, message, kampus, reason } =
-    await campusModel.getCampusByRank();
+  const {
+    statusCode, status, message, kampus, reason,
+  } = await campusModel.getCampusByRank();
 
   // 2) validate if status variabel value false
   if (status === false) {
@@ -117,10 +122,11 @@ export const getCampusByRank = catchAsync(async (req, res) => {
 });
 
 export const getCampusByFaculty = catchAsync(async (req, res) => {
-  const faculty = req.params.faculty;
+  const { faculty } = req.params;
   // 1) catch all return from kampusService into variabel
-  const { statusCode, status, message, kampus, reason } =
-    await campusModel.getCampusByFaculty(faculty);
+  const {
+    statusCode, status, message, kampus, reason,
+  } = await campusModel.getCampusByFaculty(faculty);
 
   // 2) validate if status variabel value false
   if (status === false) {
@@ -140,10 +146,11 @@ export const getCampusByFaculty = catchAsync(async (req, res) => {
 });
 
 export const getCampusByAccreditation = catchAsync(async (req, res) => {
-  const accreditation = req.params.accreditation;
+  const { accreditation } = req.params;
   // 1) catch all return from kampusService into variabel
-  const { statusCode, status, message, kampus, reason } =
-    await campusModel.getCampusByAccreditation(accreditation);
+  const {
+    statusCode, status, message, kampus, reason,
+  } = await campusModel.getCampusByAccreditation(accreditation);
 
   // 2) validate if status variabel value false
   if (status === false) {

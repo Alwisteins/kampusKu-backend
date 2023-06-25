@@ -56,7 +56,7 @@ const getCampusById = catchAsync(async (id) => {
 const getCampusByName = catchAsync(async (name) => {
   try {
     const [rows] = await pool.query(
-      `SELECT * FROM kampus WHERE name LIKE '%${name}%'`
+      `SELECT * FROM kampus WHERE name LIKE '%${name}%'`,
     );
     if (!rows.length) {
       return {
@@ -145,7 +145,7 @@ const getCampusByFaculty = catchAsync(async (fakultas) => {
   try {
     // 1) find data kampus from tabel
     const [rows] = await pool.query(
-      `SELECT * FROM kampus WHERE fakultas=${fakultas}`
+      `SELECT * FROM kampus WHERE fakultas=${fakultas}`,
     );
     // 2) return if data null
     if (rows.length < 1) {
@@ -177,7 +177,7 @@ const getCampusByAccreditation = catchAsync(async (akreditasi) => {
   try {
     // 1) find data kampus from tabel
     const [rows] = await pool.query(
-      `SELECT * FROM kampus WHERE akreditasi=${akreditasi}`
+      `SELECT * FROM kampus WHERE akreditasi=${akreditasi}`,
     );
     // 2) return if data null
     if (rows.length < 1) {
