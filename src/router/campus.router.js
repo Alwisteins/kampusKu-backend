@@ -1,19 +1,19 @@
 import { Router } from "express";
 import { campusController } from "../controller";
 
-const routes = Router();
+const campusRoutes = Router();
 
 // Rute untuk properti getAllCampus
-routes.get("/campus", campusController.getAllCampus);
+campusRoutes.get("/", campusController.getAllCampus);
 
 // Rute untuk properti getCampusByRank
-routes.get("/campus/rank", campusController.getCampusByRank);
+campusRoutes.get("/rank", campusController.getCampusByRank);
 
 // Rute untuk properti getCampusByName
-routes.get("/campus/:name", campusController.getCampusByName);
+campusRoutes.get("/:name", campusController.getCampusByName);
 
-// Rute untuk filter pada path '/campus/filter'
-routes.get("/campus/filter", (req, res) => {
+// Rute untuk filter pada path 'campus/filter'
+campusRoutes.get("/filter", (req, res) => {
   const filters = req.params; // Mengambil query parameters dari permintaan
 
   // Mengecek setiap filter yang dipilih dan memanggil controller yang sesuai
@@ -33,6 +33,6 @@ routes.get("/campus/filter", (req, res) => {
 });
 
 // Rute untuk properti getCampusById
-routes.get("/campus/detail/:id", campusController.getCampusById);
+campusRoutes.get("/detail/:id", campusController.getCampusById);
 
-export default routes;
+export default campusRoutes;
