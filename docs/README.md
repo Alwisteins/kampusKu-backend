@@ -35,7 +35,7 @@
 - Request Query:
 
 ```
-    name= "campus name"
+    name="campus name"
 ```
 
 - Response Body Success:
@@ -55,7 +55,7 @@
 - Request query:
 
 ```
-    "id": 1 / 2 / etc.
+    "id"=1 / 2 / etc.
 ```
 
 - Response Body Success:
