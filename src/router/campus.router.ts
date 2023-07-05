@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { campusController } from "../controller";
 
-const campusRoutes = Router();
+const campusRoutes: Router = Router();
 
 // Rute untuk properti getAllCampus
 campusRoutes.get("/", campusController.getAllCampus);

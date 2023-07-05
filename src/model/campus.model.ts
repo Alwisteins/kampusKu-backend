@@ -1,97 +1,107 @@
 import catchAsync from "../utils/catchAsync";
 import pool from "../config/connect";
 
-export const getAllCampus = catchAsync(async () => {
+interface Response {
+  statusCode: number;
+  status: boolean;
+  message: string;
+  kampus?: any[];
+  reason?: any;
+}
+
+type Model = (...args: any[]) => Promise<Response>;
+
+export const getAllCampus: Model = catchAsync(async () => {
   try {
-    const [rows] = await pool.query("SELECT * FROM kampus");
+    const [rows]: any = await pool.query("SELECT * FROM kampus");
     if (rows.length < 1) {
       return {
         statusCode: 404,
         status: false,
         message: "kampus tidak ditemukan",
-      };
+      } as Response;
     }
     return {
       statusCode: 200,
       status: true,
       message: "kampus ditemukan",
       kampus: rows,
-    };
-  } catch (err) {
+    } as Response;
+  } catch (err: any) {
     return {
       statusCode: 500,
       status: false,
       message: "Oops, terjadi kesalahan",
       reason: err,
-    };
+    } as Response;
   }
 });
 
-export const getCampusById = catchAsync(async (id) => {
+export const getCampusById: Model = catchAsync(async (id: number) => {
   try {
-    const [rows] = await pool.query(`SELECT * FROM kampus WHERE id=${id}`);
+    const [rows]: any = await pool.query(`SELECT * FROM kampus WHERE id=${id}`);
     if (rows.length < 1) {
       return {
         statusCode: 404,
         status: false,
         message: `kampus dengan id ${id} tidak ditemukan`,
-      };
+      } as Response;
     }
     return {
       statusCode: 200,
       status: true,
       message: "kampus ditemukan",
       kampus: rows,
-    };
+    } as Response;
   } catch (err) {
     return {
       statusCode: 500,
       status: false,
       message: "Oops, terjadi kesalahan",
       reason: err,
-    };
+    } as Response;
   }
 });
 
-export const getCampusByName = catchAsync(async (name) => {
+export const getCampusByName: Model = catchAsync(async (name: string) => {
   try {
-    const [rows] = await pool.query(
-      `SELECT * FROM kampus WHERE name LIKE %${name}%`,
+    const [rows]: any = await pool.query(
+      `SELECT * FROM kampus WHERE name LIKE '%${name}%'`
     );
     if (!rows.length) {
       return {
         statusCode: 404,
         status: false,
         message: `kampus dengan nama ${name} tidak ditemukan`,
-      };
+      } as Response;
     }
     return {
       statusCode: 200,
       status: true,
       message: "kampus ditemukan",
       kampus: rows,
-    };
+    } as Response;
   } catch (err) {
     return {
       statusCode: 500,
       status: false,
       message: "Oops, terjadi kesalahan",
       reason: err,
-    };
+    } as Response;
   }
 });
 
-export const getCampusByRank = catchAsync(async () => {
+export const getCampusByRank: Model = catchAsync(async () => {
   try {
     // 1) find data kampus from tabel
-    const [rows] = await pool.query("SELECT * FROM kampus ORDER BY rank ASC");
+    const [rows]: any = await pool.query("SELECT * FROM kampus ORDER BY rank ASC");
     // 2) return if data null
     if (rows.length < 1) {
       return {
         statusCode: 404,
         status: false,
         message: "kampus tidak ditemukan",
-      };
+      } as Response;
     }
     // 3) return if success
     return {
@@ -99,7 +109,7 @@ export const getCampusByRank = catchAsync(async () => {
       status: true,
       message: "kampus ditemukan",
       kampus: rows,
-    };
+    } as Response;
   } catch (err) {
     // 4) return if error
     return {
@@ -107,46 +117,53 @@ export const getCampusByRank = catchAsync(async () => {
       status: false,
       message: "Opps, terjadi kesalahan",
       reason: err,
-    };
+    } as Response;
   }
 });
 
-export const getCampusByFilter = catchAsync(
-  async (type, province, faculty, accreditation) => {
-    let query = "SELECT * FROM kampus WHERE";
-    const conditions = [];
-    const params = [];
+type ReqObject = {
+  type?: string;
+  province?: string;
+  faculty?: string;
+  accreditation?: string;
+};
+
+export const getCampusByFilter: Model = catchAsync(
+  async (reqObject: ReqObject): Promise<Response> => {
+    let query: string = "SELECT * FROM kampus WHERE";
+    const conditions: string[] = [];
+    const params: string[] = [];
 
     // validator
-    if (type) {
+    if (reqObject.type) {
       conditions.push("tipe = ?");
-      params.push(type);
+      params.push(reqObject.type);
     }
-    if (province) {
+    if (reqObject.province) {
       conditions.push("provinsi = ?");
-      params.push(province);
+      params.push(reqObject.province);
     }
-    if (faculty) {
+    if (reqObject.faculty) {
       conditions.push("fakultas = ?");
-      params.push(faculty);
+      params.push(reqObject.faculty);
     }
-    if (accreditation) {
+    if (reqObject.accreditation) {
       conditions.push("akreditasi = ?");
-      params.push(accreditation);
+      params.push(reqObject.accreditation);
     }
 
     query += ` ${conditions.join(" OR ")}`;
 
     try {
       // 1) find data kampus from tabel
-      const [rows] = await pool.query(query, params);
+      const [rows]: any = await pool.query(query, params);
       // 2) return if data null
       if (rows.length < 1) {
         return {
           statusCode: 404,
           status: false,
           message: "kampus tidak ditemukan",
-        };
+        } as Response;
       }
       // 3) return if success
       return {
@@ -154,7 +171,7 @@ export const getCampusByFilter = catchAsync(
         status: true,
         message: "kampus ditemukan",
         kampus: rows,
-      };
+      } as Response;
     } catch (err) {
       // 4) return if error
       return {
@@ -162,7 +179,7 @@ export const getCampusByFilter = catchAsync(
         status: false,
         message: "Opps, terjadi kesalahan",
         reason: err,
-      };
+      } as Response;
     }
-  },
+  }
 );
