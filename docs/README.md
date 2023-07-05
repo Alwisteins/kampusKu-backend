@@ -1,5 +1,19 @@
 # Documentation
 
+## Get Province
+
+- Endpoint: `GET` `api/v1/province`
+
+- Response Body Success:
+
+```
+{
+    "status": true,
+    "message": "provinsi ditemukan",
+    "province": {}
+}
+```
+
 ## Get All Campus
 
 - Endpoint: `GET` `api/v1/campus/`
