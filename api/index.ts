@@ -13,16 +13,26 @@ app.use(urlencoded({ extended: true }));
 app.use(json());
 
 /** types */
-export type resJson = { status: boolean, message: string, kampus?: any[], reason?: any };
+export type resJson = {
+  status: boolean;
+  message: string;
+  kampus?: any[];
+  reason?: any;
+  provinsi?: any;
+};
 
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ status: true, message: "connected into server!" } as resJson);
+  res
+    .status(200)
+    .json({ status: true, message: "connected into server!" } as resJson);
 });
 
 app.use(apiRoutes);
 
 app.use("*", (req: Request, res: Response) => {
-  res.status(404).json({ status: false, message: "ups something went wrong" }as resJson);
+  res
+    .status(404)
+    .json({ status: false, message: "ups something went wrong" } as resJson);
 });
 
 export default app;

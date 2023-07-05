@@ -4,6 +4,7 @@ import {
   getCampusByName,
   getCampusByRank,
   getCampusByFilter,
+  getProvince
 } from "./campus.controller";
 
 export const campusController = {
@@ -12,4 +13,5 @@ export const campusController = {
   getCampusByName,
   getCampusByRank,
   getCampusByFilter,
+  getProvince
 };

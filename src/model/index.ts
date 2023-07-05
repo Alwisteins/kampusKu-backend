@@ -4,6 +4,7 @@ import {
   getCampusByName,
   getCampusByRank,
   getCampusByFilter,
+  getProvince
 } from "./campus.model";
 
 const campusModel = {
@@ -12,6 +13,7 @@ const campusModel = {
   getCampusByName,
   getCampusByRank,
   getCampusByFilter,
+  getProvince
 };
 
 export default campusModel;

@@ -13,14 +13,9 @@ type Model = (...args: any[]) => Promise<Response>;
 
 export const getAllCampus: Model = catchAsync(async () => {
   try {
-    const [rows]: any = await pool.query("SELECT * FROM kampus");
-    if (rows.length < 1) {
-      return {
-        statusCode: 404,
-        status: false,
-        message: "kampus tidak ditemukan",
-      } as Response;
-    }
+    // 1) find data kampus from tabel
+    const [rows] = await pool.query("SELECT * FROM kampus");
+    // 2) return if success
     return {
       statusCode: 200,
       status: true,
@@ -28,6 +23,7 @@ export const getAllCampus: Model = catchAsync(async () => {
       kampus: rows,
     } as Response;
   } catch (err: any) {
+    // 3) return if error
     return {
       statusCode: 500,
       status: false,
@@ -39,21 +35,17 @@ export const getAllCampus: Model = catchAsync(async () => {
 
 export const getCampusById: Model = catchAsync(async (id: number) => {
   try {
-    const [rows]: any = await pool.query(`SELECT * FROM kampus WHERE id=${id}`);
-    if (rows.length < 1) {
-      return {
-        statusCode: 404,
-        status: false,
-        message: `kampus dengan id ${id} tidak ditemukan`,
-      } as Response;
-    }
+    // 1) find data kampus from tabel
+    const [rows] = await pool.query(`SELECT * FROM kampus WHERE id=${id}`);
+    // 2) return if success
     return {
       statusCode: 200,
       status: true,
       message: "kampus ditemukan",
       kampus: rows,
     } as Response;
-  } catch (err) {
+  } catch (err: any) {
+    // 3) return if error
     return {
       statusCode: 500,
       status: false,
@@ -65,23 +57,19 @@ export const getCampusById: Model = catchAsync(async (id: number) => {
 
 export const getCampusByName: Model = catchAsync(async (name: string) => {
   try {
-    const [rows]: any = await pool.query(
+    // 1) find data kampus from tabel
+    const [rows] = await pool.query(
       `SELECT * FROM kampus WHERE name LIKE '%${name}%'`
     );
-    if (!rows.length) {
-      return {
-        statusCode: 404,
-        status: false,
-        message: `kampus dengan nama ${name} tidak ditemukan`,
-      } as Response;
-    }
+    // 2) return if success
     return {
       statusCode: 200,
       status: true,
       message: "kampus ditemukan",
       kampus: rows,
     } as Response;
-  } catch (err) {
+  } catch (err: any) {
+    // 3) return if error
     return {
       statusCode: 500,
       status: false,
@@ -94,24 +82,16 @@ export const getCampusByName: Model = catchAsync(async (name: string) => {
 export const getCampusByRank: Model = catchAsync(async () => {
   try {
     // 1) find data kampus from tabel
-    const [rows]: any = await pool.query("SELECT * FROM kampus ORDER BY rank ASC");
-    // 2) return if data null
-    if (rows.length < 1) {
-      return {
-        statusCode: 404,
-        status: false,
-        message: "kampus tidak ditemukan",
-      } as Response;
-    }
-    // 3) return if success
+    const [rows] = await pool.query("SELECT * FROM kampus ORDER BY rank ASC");
+    // 2) return if success
     return {
       statusCode: 200,
       status: true,
       message: "kampus ditemukan",
       kampus: rows,
     } as Response;
-  } catch (err) {
-    // 4) return if error
+  } catch (err: any) {
+    // 3) return if error
     return {
       statusCode: 500,
       status: false,
@@ -156,24 +136,16 @@ export const getCampusByFilter: Model = catchAsync(
 
     try {
       // 1) find data kampus from tabel
-      const [rows]: any = await pool.query(query, params);
-      // 2) return if data null
-      if (rows.length < 1) {
-        return {
-          statusCode: 404,
-          status: false,
-          message: "kampus tidak ditemukan",
-        } as Response;
-      }
-      // 3) return if success
+      const [rows] = await pool.query(query, params);
+      // 2) return if success
       return {
         statusCode: 200,
         status: true,
         message: "kampus ditemukan",
         kampus: rows,
       } as Response;
-    } catch (err) {
-      // 4) return if error
+    } catch (err: any) {
+      // 3) return if error
       return {
         statusCode: 500,
         status: false,
@@ -183,3 +155,25 @@ export const getCampusByFilter: Model = catchAsync(
     }
   }
 );
+
+export const getProvince = catchAsync(async () => {
+  try {
+    // 1) find data provinsi from tabel
+    const [rows] = await pool.query("SELECT provinsi FROM kampus");
+    // 2) return if success
+    return {
+      statusCode: 200,
+      status: true,
+      message: "provinsi ditemukan",
+      provinsi: rows,
+    } as Response;
+  } catch (err) {
+    // 3) return if error
+    return {
+      statusCode: 500,
+      status: false,
+      message: "Opps, terjadi kesalahan",
+      reason: err,
+    } as Response;
+  }
+});

@@ -134,3 +134,28 @@ export const getCampusByFilter: Controller = catchAsync(
     } as resJson);
   }
 );
+
+export const getProvince: Controller = catchAsync(
+  async (req: Request, res: Response) => {
+
+    // 1) catch all return from kampusService into variabel
+    const { statusCode, status, message, provinsi, reason } =
+      await campusModel.getProvince();
+
+    // 2) validate if status variabel value false
+    if (status === false) {
+      return res.status(statusCode).json({
+        status,
+        message,
+        reason,
+      } as resJson);
+    }
+
+    // 3) response if success
+    return res.status(statusCode).json({
+      status,
+      message,
+      provinsi,
+    } as resJson);
+  }
+);
